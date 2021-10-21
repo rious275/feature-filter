@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "사과",
-      "material": ["예쁘다", "빨갛다"],
+      "material": ["예쁘다", "작다"],
       "kinds": "과일"
     },
     {
@@ -27,19 +27,19 @@
     {
       "id": 5,
       "name": "원숭이",
-      "material": ["빨갛다"],
+      "material": ["가볍다"],
       "kinds": "동물"
     },
     {
       "id": 6,
       "name": "아몬드",
-      "material": ["단단함"],
+      "material": ["작다"],
       "kinds": "견과류"
     },
     {
       "id": 7,
       "name": "호두",
-      "material": ["단단함", "부드러움"],
+      "material": ["단단함", "작다"],
       "kinds": "견과류"
     }
   ]

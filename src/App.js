@@ -16,61 +16,50 @@ function App() {
   const checkVal = (e) => {
     console.log(`e`, e.target.value);
   }
+
+  console.log(`dataList`, dataList)
   
   return (
     <Container>
-      <Filter1>
-        <InputDiv>
-          <input onChange={checkVal} value="사과" type="checkbox" />
-          <span>사과</span>
-        </InputDiv>
-        <InputDiv>
-          <input onChange={checkVal} value="바나나" type="checkbox" />
-          <span>바나나</span>
-        </InputDiv>
-        <InputDiv>
-          <input onChange={checkVal} value="고양이" type="checkbox" />
-          <span>고양이</span>
-        </InputDiv>
-        <InputDiv>
-          <input onChange={checkVal} value="강아지" type="checkbox" />
-          <span>강아지</span>
-        </InputDiv>
-        <InputDiv>
-          <input onChange={checkVal} value="원숭이" type="checkbox" />
-          <span>원숭이</span>
-        </InputDiv>
-        <InputDiv>
-          <input onChange={checkVal} value="아몬드" type="checkbox" />
-          <span>아몬드</span>
-        </InputDiv>
-        <InputDiv>
-          <input onChange={checkVal} value="호두" type="checkbox" />
-          <span>호두</span>
-        </InputDiv>
-      </Filter1>
-      <Filter2>
-        <InputDiv>
-          <input onChange={checkVal} value="예쁘다" type="checkbox" />
-          <span>예쁘다</span>
-        </InputDiv>
-        <InputDiv>
-          <input onChange={checkVal} value="빨갛다" type="checkbox" />
-          <span>빨갛다</span>
-        </InputDiv>
-        <InputDiv>
-          <input onChange={checkVal} value="작다" type="checkbox" />
-          <span>작다</span>
-        </InputDiv>
-        <InputDiv>
-          <input onChange={checkVal} value="부드러움" type="checkbox" />
-          <span>부드러움</span>
-        </InputDiv>
-        <InputDiv>
-          <input onChange={checkVal} value="가볍다" type="checkbox" />
-          <span>가볍다</span>
-        </InputDiv>
-      </Filter2>
+      <FilterContainer>
+        <Filter1>
+          <InputDiv>
+            <input onChange={checkVal} value="과일" type="checkbox" />
+            <span>과일</span>
+          </InputDiv>
+          <InputDiv>
+            <input onChange={checkVal} value="동물" type="checkbox" />
+            <span>동물</span>
+          </InputDiv>
+          <InputDiv>
+            <input onChange={checkVal} value="견과류" type="checkbox" />
+            <span>견과류</span>
+          </InputDiv>
+        </Filter1>
+        <Filter2>
+          <InputDiv>
+            <input onChange={checkVal} value="예쁘다" type="checkbox" />
+            <span>예쁘다</span>
+          </InputDiv>
+          <InputDiv>
+            <input onChange={checkVal} value="빨갛다" type="checkbox" />
+            <span>빨갛다</span>
+          </InputDiv>
+          <InputDiv>
+            <input onChange={checkVal} value="작다" type="checkbox" />
+            <span>작다</span>
+          </InputDiv>
+          <InputDiv>
+            <input onChange={checkVal} value="가볍다" type="checkbox" />
+            <span>가볍다</span>
+          </InputDiv>
+        </Filter2>
+      </FilterContainer>
+      <CardList>
+        {dataList?.map((data) => 
+          <Card>{data.name}</Card>
+        )}
+      </CardList>
     </Container>
   );
 }
@@ -79,10 +68,17 @@ export default App;
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
   height: 100vh;
+`;
+
+const FilterContainer = styled.div`
+  display: flex;
+
+  margin-bottom: 40px;
 `;
 
 const Filter1 = styled.div`
@@ -101,7 +97,28 @@ const InputDiv = styled.div`
 
   span {
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 18px;
-    font-weight: 900;
   }
+`;
+
+const CardList = styled.div`
+  display: flex;
+`;
+
+const Card = styled.div`
+  width: 100px;
+  height: 80px;
+
+  margin: 0 10px;
+
+  border-radius: 16px;
+
+  text-align: center;
+
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 4.2;
+
+  background-color: green;
+
+  color: #fff;
 `;
