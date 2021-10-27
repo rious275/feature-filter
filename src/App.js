@@ -13,50 +13,80 @@ function App() {
     .then(res => setDataList(res.data.requests));
   }, [])
 
-  const checkVal = (e) => {
-    console.log(`e`, e.target.value);
+  const checkFilter = (e) => {
+    const value = e.target.value;
+    const text = e.target.nextElementSibling.innerText;
+    const checked = e.target.checked;
+
+    if (checked) {
+      filtering(value, text);
+    } else {
+      remove(value, text);
+    }
   }
 
-  console.log(`dataList`, dataList)
+  const filtering = (value, text) => {
+    if (value === "kinds") {
+      const filterData = dataList.filter((data) => data[value] === text);
+      setFilterDataList([...filterDataList, ...filterData]);
+    }
+    else if (value === "material") {
+      const filterData = dataList.filter((data) => data[value].includes(text));
+      setFilterDataList([...filterDataList, ...filterData]);
+    }
+  }
+
+  const remove = (value, text) => {
+    if (value === "kinds") {
+      const filterData = filterDataList.filter((data) => data[value] !== text);
+      setFilterDataList(filterData);
+    }
+    else if (value === "material") {
+      const filterData = filterDataList.filter((data) => !data[value].includes(text));
+      setFilterDataList(filterData);
+    }
+  }
+
+  console.log(`filterDataList`, filterDataList)
   
   return (
     <Container>
       <FilterContainer>
         <Filter1>
           <InputDiv>
-            <input onChange={checkVal} value="과일" type="checkbox" />
+            <input onChange={checkFilter} value="kinds" type="checkbox" />
             <span>과일</span>
           </InputDiv>
           <InputDiv>
-            <input onChange={checkVal} value="동물" type="checkbox" />
+            <input onChange={checkFilter} value="kinds" type="checkbox" />
             <span>동물</span>
           </InputDiv>
           <InputDiv>
-            <input onChange={checkVal} value="견과류" type="checkbox" />
+            <input onChange={checkFilter} value="kinds" type="checkbox" />
             <span>견과류</span>
           </InputDiv>
         </Filter1>
         <Filter2>
           <InputDiv>
-            <input onChange={checkVal} value="예쁘다" type="checkbox" />
+            <input onChange={checkFilter} value="material" type="checkbox" />
             <span>예쁘다</span>
           </InputDiv>
           <InputDiv>
-            <input onChange={checkVal} value="빨갛다" type="checkbox" />
-            <span>빨갛다</span>
-          </InputDiv>
-          <InputDiv>
-            <input onChange={checkVal} value="작다" type="checkbox" />
-            <span>작다</span>
-          </InputDiv>
-          <InputDiv>
-            <input onChange={checkVal} value="가볍다" type="checkbox" />
+            <input onChange={checkFilter} value="material" type="checkbox" />
             <span>가볍다</span>
+          </InputDiv>
+          <InputDiv>
+            <input onChange={checkFilter} value="material" type="checkbox" />
+            <span>동그랗다</span>
+          </InputDiv>
+          <InputDiv>
+            <input onChange={checkFilter} value="material" type="checkbox" />
+            <span>단단함</span>
           </InputDiv>
         </Filter2>
       </FilterContainer>
       <CardList>
-        {dataList?.map((data) => 
+        {filterDataList.map((data) => 
           <Card>{data.name}</Card>
         )}
       </CardList>
@@ -69,10 +99,10 @@ export default App;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 
   height: 100vh;
+  margin-top: 80px;
 `;
 
 const FilterContainer = styled.div`
@@ -102,23 +132,21 @@ const InputDiv = styled.div`
 
 const CardList = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 
 const Card = styled.div`
   width: 100px;
   height: 80px;
-
-  margin: 0 10px;
+  margin: 0 10px 20px;
 
   border-radius: 16px;
-
+  
   text-align: center;
-
   font-size: 18px;
   font-weight: 600;
   line-height: 4.2;
 
   background-color: green;
-
   color: #fff;
 `;
