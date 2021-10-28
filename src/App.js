@@ -26,14 +26,24 @@ function App() {
   }
 
   const filtering = (value, text) => {
+    const list = [];
+
     if (value === "kinds") {
       const filterData = dataList.filter((data) => data[value] === text);
-      setFilterDataList([...filterDataList, ...filterData]);
+      list.push(...filterDataList, ...filterData);
+      overlap(list);
     }
     else if (value === "material") {
       const filterData = dataList.filter((data) => data[value].includes(text));
-      setFilterDataList([...filterDataList, ...filterData]);
+      list.push(...filterDataList, ...filterData);
+      overlap(list);
     }
+  }
+
+  // 필터 리스트 중복값 제거
+  const overlap = (list) => {
+    const overlap = list.filter((data, idx, call) => idx === call.findIndex(t => t.id === data.id));
+    setFilterDataList(overlap)
   }
 
   const remove = (value, text) => {
@@ -87,7 +97,7 @@ function App() {
       </FilterContainer>
       <CardList>
         {filterDataList.map((data) => 
-          <Card>{data.name}</Card>
+          <Card key={data.id}>{data.name}</Card>
         )}
       </CardList>
     </Container>
