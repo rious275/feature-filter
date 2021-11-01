@@ -13,6 +13,7 @@ function App() {
     .then(res => setDataList(res.data.requests));
   }, [])
 
+  // 체크값 true/false 구분
   const checkFilter = (e) => {
     const value = e.target.value;
     const text = e.target.nextElementSibling.innerText;
@@ -25,6 +26,7 @@ function App() {
     }
   }
 
+  // 필터 메뉴 선택
   const filtering = (value, text) => {
     const list = [];
 
@@ -40,12 +42,13 @@ function App() {
     }
   }
 
-  // 필터 리스트 중복값 제거
+  // 필터 리스트 중복 요소 삭제
   const overlap = (list) => {
     const overlap = list.filter((data, idx, call) => idx === call.findIndex(t => t.id === data.id));
     setFilterDataList(overlap)
   }
 
+  // 필터 리스트 요소 삭제
   const remove = (value, text) => {
     if (value === "kinds") {
       const filterData = filterDataList.filter((data) => data[value] !== text);
@@ -56,8 +59,6 @@ function App() {
       setFilterDataList(filterData);
     }
   }
-
-  console.log(`filterDataList`, filterDataList)
   
   return (
     <Container>
